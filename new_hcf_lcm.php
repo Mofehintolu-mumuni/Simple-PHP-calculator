@@ -1,0 +1,338 @@
+<?php
+
+/*
+
+Code AUTHOR: MOFEHINTOLU MUMUNI
+
+CODE NAME: HCF AND LCM CALCULATOR
+
+PRODUCTION DATE: 18/3/2018
+
+
+*/
+
+
+
+
+class TOLU_HCF_LCM_CALCULATOR{
+    
+    private $multiply;
+    
+    public function __construct() {
+        $multiply = 1;
+        $this->$multiply = $multiply;
+        $multiply = $this->$multiply;
+    }
+
+    
+     function check_primes($value)
+    {
+        if(($value < 0) || ($value == 1) || ($value == 2) || ($value == 3)){
+            
+            return true;
+            
+        }else{
+        $half_value = $value/2;
+        
+        $count = 0;
+        
+        $p = 2;
+        if($half_value == $p)
+        {
+            return false;
+        }
+        else{
+             for($x=$p;$x<floor($half_value);$x++)
+        {
+            if($value%$x == 0)
+            {
+                $count++;
+            }
+            //else{
+            //    $count = $count;
+            //}
+        }
+        if($count>0)
+        {
+            return false;
+            //echo$value." is not a prime number";
+        }
+        else{
+            return true;
+            //echo$value." is a prime number";
+        }
+        }
+        
+            
+        }
+        
+   
+    }
+    
+//check_primes($numb1);
+
+    function get_highest_numb($fnumb,$snumb)
+    {
+    if($fnumb>$snumb)
+    {
+        return $fnumb;
+    }
+    else{
+        return $snumb;
+    }
+    }
+    
+    function get_lowest_numb($val1,$val2)
+    {
+       if($val1<$val2)
+    {
+        return $val1;
+    }
+    else{
+        return $val2;
+    }  
+    }
+    
+ 
+   function continuos_division($val1,$val2,$divisor,$multiply)
+    {
+        
+        $multiply =  $multiply;
+           //$count = 1;     
+       //while($divisor>1)
+        //{
+            if($divisor == 1)
+            {
+                return $multiply;
+            }
+            
+            if(($val1%$divisor ==0)&&($val2%$divisor ==0))
+           {
+           $temp1 = $val1/$divisor;
+           $temp2 = $val2/$divisor;
+           
+           $multiply =  $multiply*$divisor;
+           
+           //$count += 1;
+           
+           //return $count;
+           
+           return $this->continuos_division($temp1,$temp2,$divisor,$multiply);          
+                      
+           }
+           else{
+            
+            return $this->get_hcf($val1,$val2,$multiply);
+            
+           
+           }
+
+       //}
+        
+        
+    }
+
+    
+    
+    
+    
+    
+    //echo(get_hcf(1731,53));
+    
+    
+    function check_numbs($val1,$val2,$divisor)
+    {
+        if(($val1%$divisor == 0)&&($val2%$divisor == 0))
+        {
+            return $divisor;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    
+     function get_divisor($val1,$val2)
+    {
+        
+        $low_numb = $this->get_lowest_numb($val1,$val2);
+        $high_numb = $this->get_highest_numb($val1,$val2); 
+        
+        if($low_numb ==1)
+        {
+            $divisor == 1;
+            return $divisor;
+            
+        }
+        
+        $half_low = $low_numb/2;
+        
+        $half_high = $high_numb/2;
+        
+        
+        
+        
+        for($x=2;$x<=floor($half_low);$x++)
+        {
+            if(($high_numb%$x == 0) && ($low_numb%$x == 0))
+            {
+                $divisor = $x;
+                return $divisor;
+                
+            }
+           
+            
+        }
+       
+    }
+    
+    
+    
+        function get_hcf($val1,$val2,$multiply)
+    {
+        if(($val1 ==1)||($val2==1))
+        {
+            $low_numb = $this->get_lowest_numb($val1,$val2);
+            $high_numb = $this->get_highest_numb($val1,$val2);
+            $hcf = $low_numb*$multiply;
+                return $hcf;
+               
+        }
+        
+         if($val1 == $val2)
+        {
+            
+            $hcf = $val2;
+                return $hcf;
+                
+        }
+        
+        $prime_checker1 = $this->check_primes($val1);
+        $prime_checker2 = $this->check_primes($val2);
+        
+        $isPrime = false;
+        
+        if(($prime_checker1 == true) || ($prime_checker2 == true))
+        {
+         $isPrime = true;   
+        }
+       // else{
+       //     $isPrime = false;
+       // }
+        
+        if(($prime_checker1 != true) && ($prime_checker2 != true))
+        {
+         $isPrime = false; 
+        }
+       // else{
+       //     $isPrime = true;
+        //}
+        
+        if($isPrime == true)
+        {
+            $low_numb = $this->get_lowest_numb($val1,$val2);
+            $high_numb = $this->get_highest_numb($val1,$val2);
+            
+            if(($low_numb*2) <= $high_numb)
+            {
+                 if(($val1%$low_numb == 0) && ($val2%$low_numb == 0))
+            {
+                $hcf = $low_numb*$multiply;
+                return $hcf;
+                
+            }
+             else{
+                $hcf = $multiply*1;
+                return $hcf;
+                
+            }
+            
+                
+            }
+             elseif(($low_numb*2) > ($high_numb)){
+             
+                $hcf = 1*$multiply;
+                return $hcf;
+   
+            }
+            
+            if($low_numb == $high_numb)
+            {
+                $hcf = $low_numb*$multiply;
+                return $hcf;
+            }
+              
+        }    
+        
+        
+       elseif($isPrime == false)
+        {
+           $divisor = $this->get_divisor($val1,$val2);
+           
+        if($divisor == false)
+        {
+            return $multiply;
+            
+        }
+        else
+        {
+          $hcf = $this->continuos_division($val1,$val2,$divisor,$multiply);
+           
+          return $hcf;  
+        }
+           
+           
+                      
+            
+        }
+            
+        
+    }
+    
+    //$hcf = get_hcf($val1,$val2);
+    
+    function get_lcm($val1,$val2,$hcf)
+    {
+        $lcm = ($val1*$val2)/$hcf;
+        return $lcm;
+        
+    }
+   
+   function get_hcf_and_lcm($num1,$num2)
+   {
+    $multiply = 1;
+    //HCF
+    $hcf = $this->get_hcf($num1,$num2,$multiply);
+    echo("The HCF of ".$num1." and ".$num2." is ".$hcf);
+    echo '</br>';
+    
+    //LCM
+   $lcm = $this->get_lcm($num1,$num2,$hcf);
+   echo("The LCM of ".$num1." and ".$num2." is ".$lcm);
+   }
+   
+   
+   }
+   
+  
+   
+   
+   
+   /*HCF 
+   
+    $num1 = 209;
+   $num2 = 551;
+   
+   $my_cal = new TOLU_HCF_LCM_CALCULATOR();
+   
+   $my_cal->get_hcf_and_lcm($num1,$num2);*/
+   
+  /* $numeric = get_hcf(130,1,1);
+    echo("The HCF is ".$numeric);
+    echo '</br>';
+    
+   $lcm = get_lcm(130,1,$numeric);
+   echo("The LCM is ".$lcm);
+   /*LCM*/
+   
+?>
